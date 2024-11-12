@@ -1,0 +1,37 @@
+let mapleader = "\<Space>" 
+
+set number
+set relativenumber
+set tabstop=4      " Set tab width to 4 spaces
+set shiftwidth=4   " Set indentation width to 4 spaces
+set expandtab      " Convert tabs to spaces
+set hlsearch
+
+vnoremap <C-c> "+y
+map <C-v> "+p
+
+nnoremap <leader>ec :e ~\.vsvimrc<CR>
+nnoremap <leader>r :source ~\.vsvimrc<CR>
+
+" Key mapping to save file with Ctrl+S
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>a
+vnoremap <C-s> <Esc>:w<CR>gv
+
+" Mapping to select all text in normal mode
+nnoremap <C-a> ggVG
+
+" Mapping to select all text in visual mode
+vnoremap <C-a> ggVG
+
+" Mapping to select all text in insert mode
+inoremap <C-a> <Esc>ggVG
+
+vnoremap K :m '<-2<CR>gv=gv
+vnoremap J :m '>+1<CR>gv=gv
+
+set clipboard=unnamedplus
+
+nnoremap gcc :vsc Edit.ToggleComment<CR>
+vnoremap gc :vsc Edit.ToggleComment<CR><Esc><Esc>
+nnoremap gi :vsc Edit.GoToImplementation<CR>
