@@ -35,3 +35,5 @@ set clipboard=unnamedplus
 nnoremap gcc :vsc Edit.ToggleComment<CR>
 vnoremap gc :vsc Edit.ToggleComment<CR><Esc><Esc>
 nnoremap gi :vsc Edit.GoToImplementation<CR>
+nnoremap <leader>e :vsc View.SolutionExplorer<CR>
+nnoremap <leader>ff :vsc Edit.GoToAll<CR>
