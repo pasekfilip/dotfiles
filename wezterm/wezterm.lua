@@ -157,10 +157,15 @@ config.keys = {
 		key = "t",
 		action = wezterm.action.SpawnTab "CurrentPaneDomain",
 	},
+	-- {
+	-- 	mods = "CTRL | SHIFT",
+	-- 	key = "w",
+	-- 	action = wezterm.action.CloseCurrentTab { confirm = true }
+	-- },
 	{
 		mods = "CTRL | SHIFT",
 		key = "w",
-		action = wezterm.action.CloseCurrentTab { confirm = true }
+		action = wezterm.action.CloseCurrentPane { confirm = false }
 	},
 	{
 		mods = "CTRL | SHIFT",
@@ -174,7 +179,7 @@ config.keys = {
 	},
 	{
 		mods = "CTRL | SHIFT",
-		key = "*",
+		key = "v",
 		action = wezterm.action.SplitHorizontal { domain = "CurrentPaneDomain" }
 	},
 	{
