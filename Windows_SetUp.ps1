@@ -1,10 +1,15 @@
 New-Item -ItemType SymbolicLink -Path "C:/Filip/Configs/" -Target "C:/Users/Filip/AppData/Local/nvim/"
 
-# if (-not(Get-Command winget))
-# {
-# 	Install-Script -Name winget-install
-# }
-#
+if (-not(Get-Command winget))
+{
+	Install-Script -Name winget-install
+}
+
+winget install git.git
+
+
+
+
 # winget install Microsoft.PowerShell
 # winget install neovim
 # winget install glazewm
@@ -15,4 +20,4 @@ New-Item -ItemType SymbolicLink -Path "C:/Filip/Configs/" -Target "C:/Users/Fili
 # winget install brave.brave
 # winget install spotify
 # winget install discord
-#
+
