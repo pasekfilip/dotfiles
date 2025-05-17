@@ -1,42 +1,3 @@
--- WezTerm Keybindings Documentation by dragonlobster
--- ===================================================
--- Leader Key:
--- The leader key is set to ALT + q, with a timeout of 2000 milliseconds (2 seconds).
--- To execute any keybinding, press the leader key (ALT + q) first, then the corresponding key.
-
--- Keybindings:
--- 1. Tab Management:
---    - LEADER + c: Create a new tab in the current pane's domain.
---    - LEADER + x: Close the current pane (with confirmation).
---    - LEADER + b: Switch to the previous tab.
---    - LEADER + n: Switch to the next tab.
---    - LEADER + <number>: Switch to a specific tab (0–9).
-
--- 2. Pane Splitting:
---    - LEADER + |: Split the current pane horizontally into two panes.
---    - LEADER + -: Split the current pane vertically into two panes.
-
--- 3. Pane Navigation:
---    - LEADER + h: Move to the pane on the left.
---    - LEADER + j: Move to the pane below.
---    - LEADER + k: Move to the pane above.
---    - LEADER + l: Move to the pane on the right.
-
--- 4. Pane Resizing:
---    - LEADER + LeftArrow: Increase the pane size to the left by 5 units.
---    - LEADER + RightArrow: Increase the pane size to the right by 5 units.
---    - LEADER + DownArrow: Increase the pane size downward by 5 units.
---    - LEADER + UpArrow: Increase the pane size upward by 5 units.
-
--- 5. Status Line:
---    - The status line indicates when the leader key is active, displaying an ocean wave emoji (🌊).
-
--- Miscellaneous Configurations:
--- - Tabs are shown even if there's only one tab.
--- - The tab bar is located at the bottom of the terminal window.
--- - Tab and split indices are zero-based.
-
-
 -- Pull in the wezterm API
 local wezterm = require "wezterm"
 
@@ -208,22 +169,22 @@ config.keys = {
 		action = wezterm.action.ActivatePaneDirection "Right"
 	},
 	{
-		mods = "LEADER",
+		mods = "CTRL | SHIFT",
 		key = "LeftArrow",
 		action = wezterm.action.AdjustPaneSize { "Left", 5 }
 	},
 	{
-		mods = "LEADER",
+		mods = "CTRL | SHIFT",
 		key = "RightArrow",
 		action = wezterm.action.AdjustPaneSize { "Right", 5 }
 	},
 	{
-		mods = "LEADER",
+		mods = "CTRL | SHIFT",
 		key = "DownArrow",
 		action = wezterm.action.AdjustPaneSize { "Down", 5 }
 	},
 	{
-		mods = "LEADER",
+		mods = "CTRL | SHIFT",
 		key = "UpArrow",
 		action = wezterm.action.AdjustPaneSize { "Up", 5 }
 	},
