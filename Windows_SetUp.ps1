@@ -32,7 +32,8 @@ $programs =
 	"junegunn.fzf",
 	"BurntSushi.ripgrep.GNU",
 	"JesseDuffield.lazygit",
-	"Microsoft.PowerShell"
+	"Microsoft.PowerShell",
+	"Microsoft.PowerToys"
 )
 
 foreach ($program in $programs)
