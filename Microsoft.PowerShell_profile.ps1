@@ -7,7 +7,6 @@ if (!(Get-Module PSReadLine))
 }
 # Shows navigable menu of all options when hitting Tab
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
-
 # Autocompleteion for Arrow keys
 Set-PSReadLineOption -HistorySearchCursorMovesToEnd
 Set-PSReadLineOption -EditMode Vi
@@ -32,11 +31,13 @@ if (Test-Path($ChocolateyProfile)) {
   Import-Module "$ChocolateyProfile"
 }
 
+Set-Location C:/Filip/
+
 Set-Alias godot4 "C:\Filip\Game_Projects\Godot_v4.3-stable_win64.exe\Godot_v4.3-stable_win64.exe"
 Set-Alias vi nvim
 Set-Alias ls betterLS
 function betterLS{
-	eza -a --group-directories-first --icons
+	eza -l
 }
 
 function fo(){
@@ -44,4 +45,44 @@ function fo(){
 	if ($f){
 		nvim $f
 	}
+}
+
+function fsize{
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$FolderPath,
+
+        [ValidateSet("Bytes", "KB", "MB", "GB")]
+        [string]$Unit = "MB"
+    )
+
+    if (-Not (Test-Path $FolderPath)) {
+        Write-Error "The folder path '$FolderPath' does not exist."
+        return
+    }
+
+    $sizeInBytes = (Get-ChildItem $FolderPath -Recurse -File | Measure-Object -Property Length -Sum).Sum
+
+    switch ($Unit) {
+        "Bytes" { return "$sizeInBytes Bytes" }
+        "KB"    { return ("{0:N2} KB" -f ($sizeInBytes / 1KB)) }
+        "MB"    { return ("{0:N2} MB" -f ($sizeInBytes / 1MB)) }
+        "GB"    { return ("{0:N2} GB" -f ($sizeInBytes / 1GB)) }
+    }
+}
+
+function Set-JavaHome {
+    param (
+        [string]$version
+    )
+
+    switch ($version) {
+        "11" { $env:JAVA_HOME = "C:\Program Files\Amazon Corretto\jdk11.0.27_6\" }
+        "21" { $env:JAVA_HOME = "C:\Program Files\Amazon Corretto\jdk21.0.7_6" }
+        default { Write-Error "Unknown JDK version: $version" }
+    }
+
+    $env:Path = "$env:JAVA_HOME\bin;" + ((($env:Path -split ";") | Where-Object { $_ -notmatch "jdk" }) -join ";")
+
+    java --version
 }

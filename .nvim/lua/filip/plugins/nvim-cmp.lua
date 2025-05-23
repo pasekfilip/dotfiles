@@ -1,6 +1,8 @@
 return {
 	'saghen/blink.cmp',
-	dependencies = { 'rafamadriz/friendly-snippets' },
+	dependencies = {
+		'rafamadriz/friendly-snippets',
+	},
 	version = '1.*',
 
 	opts = {
@@ -18,15 +20,21 @@ return {
 		{
 			documentation =
 			{
-				auto_show = false
+				auto_show = true
 			},
-			accept = {
-				auto_brackets = { enabled = false }, -- Disable parentheses for functions in PowerShell
-			}
+			-- accept = {
+			-- 	auto_brackets = { enabled = false }, -- Disable parentheses for functions in PowerShell
+			-- }
 		},
 
 		sources = {
-			default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+			default = { 'lsp', 'path', 'snippets', 'buffer' },
+			per_filetype = {
+				sql = { 'snippets', 'dadbod', 'buffer' },
+				mysql = { 'snippets', 'dadbod', 'buffer' },
+				txt = { 'buffer' },
+				-- lua = { 'lazydev' },
+			},
 			providers = {
 				lazydev = {
 					name = "LazyDev",
@@ -34,6 +42,11 @@ return {
 					-- make lazydev completions top priority (see `:h blink.cmp`)
 					score_offset = 100,
 				},
+				dadbod = {
+					name = "Dadbod",
+					module = "vim_dadbod_completion.blink",
+					score_offset = 100,
+				}
 			},
 		},
 

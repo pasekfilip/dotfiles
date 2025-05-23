@@ -32,7 +32,9 @@ return {
 				"pyright",
 				"clangd",
 				"ts_ls",
-				"powershell_es"
+				"powershell_es",
+				"csharp_ls",
+				"jdtls",
 			},
 
 			automatic_installation = false,

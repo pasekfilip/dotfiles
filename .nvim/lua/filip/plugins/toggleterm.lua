@@ -10,7 +10,7 @@ return {
 				size = 100,
 				-- open_mapping = [[<C-/]],
 				shading_factor = 2,
-				direction = 'vertical', -- 'vertical' | 'horizontal' | 'tab' | 'float'
+				direction = 'float', -- 'vertical' | 'horizontal' | 'tab' | 'float'
 				close_on_exit = true,
 				shell = 'pwsh.exe',
 			})
