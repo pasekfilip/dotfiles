@@ -123,9 +123,51 @@ return {
 			}
 		})
 
-		-- local capabilities = cmp_nvim_lsp.get_lsp_capabilities();
-		-- capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities({}, false))
-		--
+		-- Set your Java path
+		local java_exec = "C:/Program Files/Amazon Corretto/jdk24.0.1_9/bin/java.exe"
+
+		-- Find the JAR file installed by Mason
+		local jdtls_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
+		local launcher_jar = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar")
+		local config_dir = jdtls_path .. "/config_win" -- use config_linux / config_mac if needed
+		local workspace_dir = vim.fn.stdpath("data") ..
+			"/jdtls-workspace/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+
+		vim.lsp.config("jdtls", {
+			cmd = {
+				java_exec,
+				"-Declipse.application=org.eclipse.jdt.ls.core.id1",
+				"-Dosgi.bundles.defaultStartLevel=4",
+				"-Declipse.product=org.eclipse.jdt.ls.core.product",
+				"-Dlog.protocol=true",
+				"-Dlog.level=ALL",
+				"-Xmx1g",
+				"--add-modules=ALL-SYSTEM",
+				"--add-opens", "java.base/java.util=ALL-UNNAMED",
+				"--add-opens", "java.base/java.lang=ALL-UNNAMED",
+				"-jar", launcher_jar,
+				"-configuration", config_dir,
+				"-data", workspace_dir,
+			},
+			capabilities = capabilities,
+			filetypes = { "java" },
+			root_markers = { ".git", "pom.xml", "build.gradle" },
+			settings = {
+				java = {
+					configuration = {
+						runtimes = {
+							{
+								name = "JavaSE-24",
+								path = "C:/Program Files/Amazon Corretto/jdk24.0.1_9/",
+							},
+						},
+					},
+				},
+			},
+		})
+
+		vim.lsp.enable("jdtls")
+
 		-- mason_lspconfig.setup_handlers({
 		-- 	-- default handler for installed servers
 		-- 	function(server_name)

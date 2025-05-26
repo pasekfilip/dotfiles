@@ -78,7 +78,8 @@ function Set-JavaHome {
 
     switch ($version) {
         "11" { $env:JAVA_HOME = "C:\Program Files\Amazon Corretto\jdk11.0.27_6\" }
-        "21" { $env:JAVA_HOME = "C:\Program Files\Amazon Corretto\jdk21.0.7_6" }
+        "21" { $env:JAVA_HOME = "C:\Program Files\Amazon Corretto\jdk21.0.7_6/" }
+        "24" { $env:JAVA_HOME = "C:\Program Files\Amazon Corretto\jdk24.0.1_9" }
         default { Write-Error "Unknown JDK version: $version" }
     }
 
