@@ -6,8 +6,6 @@ set("i", "<C-V>", '<C-R>+', { noremap = true, silent = true })
 
 set("n", "<C-s>", ":w<CR>", { desc = "Save file", noremap = true, silent = true })
 set("i", "<C-s>", "<cmd>:w<CR>", { desc = "Save file", noremap = true, silent = true })
-set("n", "<leader>x", "<cmd>.lua<CR>", { desc = "Execute the current line" })
-set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Execute the current file" })
 
 -- window management
 set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })     -- split window vertically
@@ -43,6 +41,21 @@ set("n", "<F5>", function()
 	vim.cmd("!cd " .. vim.fn.getcwd() .. "\\build && cmake --build . && main.exe")
 end)
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "sql", "mysql", "pgsql", "plsql" },
+	callback = function()
+		set("v", "x", ":DB<CR>", { buffer = true, silent = true })
+	end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "lua",
+	callback = function()
+		set("n", "<leader>x", "<cmd>.lua<CR>", { desc = "Execute the current line", buffer = true, silent = true })
+		set("n", "<leader><leader>x", "<cmd>source %<CR>",
+			{ desc = "Execute the current file", buffer = true, silent = true })
+	end
+})
 -- very cool remap
 set("n", "j", function()
 	local count = vim.v.count

@@ -209,14 +209,15 @@ config.keys = {
 
 }
 
--- for i = 0, 9 do
---     -- leader + number to activate that tab
---     table.insert(config.keys, {
---         key = tostring(i),
---         mods = "LEADER",
---         action = wezterm.action.ActivateTab(i),
---     })
--- end
+
+local current_layout_number_row = { '+', '[', '{', '(', '&' }
+for i, v in ipairs(current_layout_number_row) do
+	table.insert(config.keys, {
+		mods = "CTRL",
+		key = v,
+		action = wezterm.action.ActivateTab(i - 1),
+	})
+end
 
 -- tab bar
 config.hide_tab_bar_if_only_one_tab = false

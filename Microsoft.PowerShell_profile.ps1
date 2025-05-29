@@ -47,6 +47,10 @@ function fo(){
 	}
 }
 
+function zi {
+    zoxide query --interactive | ForEach-Object { Set-Location $_ }
+}
+
 function fsize{
     param (
         [Parameter(Mandatory = $true)]
