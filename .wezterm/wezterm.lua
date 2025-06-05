@@ -11,7 +11,6 @@ if wezterm.config_builder then
 end
 
 -- local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
-
 config.front_end = "OpenGL"
 config.max_fps = 144
 config.animation_fps = 1
@@ -22,9 +21,9 @@ config.color_scheme = "Dracula"
 config.font = wezterm.font("JetBrains Mono NL")
 config.font_size = 16
 config.window_padding = {
-	left = 1,
+	left = 2,
 	right = 0,
-	top = 1,
+	top = 2,
 	bottom = 0
 }
 
@@ -35,11 +34,34 @@ config.adjust_window_size_when_changing_font_size = false
 
 config.disable_default_key_bindings = true
 
+-- tab bar
+config.hide_tab_bar_if_only_one_tab = false
+config.tab_bar_at_bottom = true
+config.use_fancy_tab_bar = false
+config.tab_and_split_indices_are_zero_based = true
+
+wezterm.on('window-opacity-change', function(window)
+	local overrides = window:get_config_overrides() or {}
+
+	if not overrides.window_background_opacity then
+		overrides.window_background_opacity = 1
+	else
+		overrides.window_background_opacity = nil
+	end
+
+	window:set_config_overrides(overrides)
+end)
+
 config.keys = {
 	{
-		key = 'v',
 		mods = 'CTRL',
+		key = 'v',
 		action = wezterm.action.PasteFrom 'Clipboard'
+	},
+	{
+		mods = 'CTRL | SHIFT',
+		key = 'g',
+		action = wezterm.action.EmitEvent 'window-opacity-change'
 	},
 	-- {
 	-- 	key = 'm',
@@ -218,12 +240,6 @@ for i, v in ipairs(current_layout_number_row) do
 		action = wezterm.action.ActivateTab(i - 1),
 	})
 end
-
--- tab bar
-config.hide_tab_bar_if_only_one_tab = false
-config.tab_bar_at_bottom = true
-config.use_fancy_tab_bar = false
-config.tab_and_split_indices_are_zero_based = true
 
 --tmux restore
 wezterm.on("save-indicator", function(window, _)
