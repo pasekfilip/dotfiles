@@ -124,7 +124,7 @@ return {
 		})
 
 		-- Set your Java path
-		local java_exec = "C:/Program Files/Amazon Corretto/jdk24.0.1_9/bin/java.exe"
+		local java_exec = "C:/Program Files/Amazon Corretto/jdk21.0.7_6/bin/java.exe"
 
 		-- Find the JAR file installed by Mason
 		local jdtls_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
@@ -157,16 +157,44 @@ return {
 					configuration = {
 						runtimes = {
 							{
-								name = "JavaSE-24",
-								path = "C:/Program Files/Amazon Corretto/jdk24.0.1_9/",
+								name = "JavaSE-21",
+								path = "C:/Program Files/Amazon Corretto/jdk21.0.7_6/"
 							},
 						},
 					},
 				},
 			},
 		})
-
 		vim.lsp.enable("jdtls")
+
+		local node_modules_path = "C:\\Users\\filip\\AppData\\Local\\nvm\\v20.11.1\\node_modules"
+		vim.lsp.config('angularls', {
+			cmd = {
+				'ngserver',
+				'--stdio',
+				'--tsProbeLocations', node_modules_path,
+				'--ngProbeLocations', node_modules_path
+			},
+			filetypes = { "ts", 'html' },
+			root_markers = { 'angular.json', 'project.json', 'package.json', '.git' },
+		})
+		vim.lsp.enable("angularls")
+
+
+		-- vim.lsp.config('angularls', {
+		-- 	cmd = {
+		-- 		'node',
+		-- 		vim.fn.getcwd() .. '/node_modules/@angular/language-server/bin/ngserver',
+		-- 		'--stdio',
+		-- 		'--tsProbeLocations', vim.fn.getcwd() .. '/node_modules',
+		-- 		'--ngProbeLocations', vim.fn.getcwd() .. '/node_modules/@angular/language-service'
+		-- 	},
+		-- 	filetypes = { 'typescript', 'html', 'ts' },
+		-- 	root_dir = vim.fs.root(0, { 'angular.json', 'tsconfig.app.json', 'tsconfig.json' }),
+		-- 	capabilities = capabilities,
+		-- })
+		--
+		-- vim.lsp.enable('angularls')
 
 		-- mason_lspconfig.setup_handlers({
 		-- 	-- default handler for installed servers

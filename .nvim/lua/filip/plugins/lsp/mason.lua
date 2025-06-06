@@ -34,6 +34,7 @@ return {
 				"powershell_es",
 				"csharp_ls",
 				"jdtls",
+				"ts_ls",
 			},
 
 			automatic_installation = false,
