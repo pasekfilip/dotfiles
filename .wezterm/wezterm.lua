@@ -11,13 +11,14 @@ if wezterm.config_builder then
 end
 
 -- local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
-config.front_end = "OpenGL"
+config.front_end = "WebGpu"
 config.max_fps = 144
 config.animation_fps = 1
 config.term = "xterm-256color"
 config.default_cursor_style = "SteadyBlock"
 config.window_background_opacity = 0.3
 config.color_scheme = "Dracula"
+-- config.color_scheme = "Builtin Solarized Dark"
 config.font = wezterm.font("JetBrains Mono NL")
 config.font_size = 16
 config.window_padding = {
@@ -27,8 +28,11 @@ config.window_padding = {
 	bottom = 0
 }
 
+config.freetype_load_target = "Normal"
+config.freetype_render_target = "Normal"
+
 config.window_decorations = "NONE | RESIZE"
-config.default_prog = { "C:/Program Files/PowerShell/7/pwsh.exe" }
+config.default_prog = { "pwsh.exe", "-NoLogo" }
 config.initial_cols = 10
 config.adjust_window_size_when_changing_font_size = false
 
@@ -241,16 +245,16 @@ for i, v in ipairs(current_layout_number_row) do
 	})
 end
 
---tmux restore
-wezterm.on("save-indicator", function(window, _)
-	local saved_icon = " " .. "\u{eb4b}" .. "  ";
-
-	window:set_left_status(wezterm.format {
-		{ Text = saved_icon },
-	})
-
-	wezterm.sleep_ms(1500)
-	window:set_left_status("")
-end)
-
+-- --tmux restore
+-- wezterm.on("save-indicator", function(window, _)
+-- 	local saved_icon = " " .. "\u{eb4b}" .. "  ";
+--
+-- 	window:set_left_status(wezterm.format {
+-- 		{ Text = saved_icon },
+-- 	})
+--
+-- 	wezterm.sleep_ms(1500)
+-- 	window:set_left_status("")
+-- end)
+--
 return config

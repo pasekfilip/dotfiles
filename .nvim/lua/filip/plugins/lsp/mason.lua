@@ -31,7 +31,6 @@ return {
 				"yamlls",
 				"pyright",
 				"clangd",
-				"ts_ls",
 				"powershell_es",
 				"csharp_ls",
 				"jdtls",
