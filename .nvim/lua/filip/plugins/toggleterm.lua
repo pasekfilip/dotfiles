@@ -13,6 +13,10 @@ return {
 				direction = 'float', -- 'vertical' | 'horizontal' | 'tab' | 'float'
 				close_on_exit = true,
 				shell = 'pwsh.exe',
+				on_open = function (term)
+					local cwd = vim.fn.getcwd()
+					vim.fn.chansend(term.job_id, "cd '" .. cwd .. "'; clear \r")
+				end
 			})
 		end
 	},
