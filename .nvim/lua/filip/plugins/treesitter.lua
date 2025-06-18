@@ -38,7 +38,8 @@ return {
 				"query",
 				"vimdoc",
 				"c_sharp",
-				"cpp"
+				"cpp",
+				"python"
 			},
 			auto_install = false,
 			sync_install = true,

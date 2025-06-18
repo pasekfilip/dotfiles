@@ -130,12 +130,17 @@ return {
 		local jdtls_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
 		local launcher_jar = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar")
 		local config_dir = jdtls_path .. "/config_win" -- use config_linux / config_mac if needed
+		-- local root_dir = lspconfig.util.root_pattern(unpack(root_files))(vim.fn.getcwd())
+		local root_dir = require("lspconfig.util").root_pattern("pom.xml", ".git", "build.gradle")(vim.fn.getcwd()) or
+			vim.fn.getcwd()
+
 		local workspace_dir = vim.fn.stdpath("data") ..
-			"/jdtls-workspace/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+			"/jdtls-workspace/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
 
 		vim.lsp.config("jdtls", {
 			cmd = {
 				java_exec,
+				"-javaagent:C:/Filip/Repo/lombok.jar",
 				"-Declipse.application=org.eclipse.jdt.ls.core.id1",
 				"-Dosgi.bundles.defaultStartLevel=4",
 				"-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -149,18 +154,26 @@ return {
 				"-configuration", config_dir,
 				"-data", workspace_dir,
 			},
+			root_dir = root_dir,
 			capabilities = capabilities,
 			filetypes = { "java" },
-			root_markers = { ".git", "pom.xml", "build.gradle" },
+			-- root_markers = { ".git", "pom.xml", "build.gradle" },
 			settings = {
 				java = {
+					-- contentProvider = { preferred = 'javap' },
 					configuration = {
 						runtimes = {
 							{
-								name = "JavaSE-21",
-								path = "C:/Program Files/Amazon Corretto/jdk21.0.7_6/"
+								name = "JavaSE-11",
+								path = "C:/Program Files/Amazon Corretto/jdk11.0.27_6/",
+								default = true,
 							},
+							-- {
+							-- 	name = "JavaSE-21",
+							-- 	path = "C:/Program Files/Amazon Corretto/jdk21.0.7_6/"
+							-- },
 						},
+						updateBuildConfiguration = "interactive",
 					},
 				},
 			},
