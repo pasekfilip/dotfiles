@@ -32,7 +32,6 @@ return {
 				"pyright",
 				"clangd",
 				"powershell_es",
-				"csharp_ls",
 				"jdtls",
 				"ts_ls",
 			},
