@@ -1,8 +1,8 @@
 vim.g.mapleader = " "
 local set = vim.keymap.set
 
-set("n", "<C-V>", '"+p', { noremap = true, silent = true })
-set("i", "<C-V>", '<C-R>+', { noremap = true, silent = true })
+-- set("n", "<C-V>", '"+p', { noremap = true, silent = true })
+-- set("i", "<C-V>", '<C-R>+', { noremap = true, silent = true })
 
 set("n", "<C-s>", ":w<CR>", { desc = "Save file", noremap = true, silent = true })
 set("i", "<C-s>", "<cmd>:w<CR>", { desc = "Save file", noremap = true, silent = true })
