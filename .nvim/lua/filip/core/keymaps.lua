@@ -38,8 +38,25 @@ set("n", "N", "Nzzzv")
 set("x", "<leader>p", "\"_dP", { desc = "When pasting over selected it sends it to the void register" }) -- very cool remap
 
 set("n", "<F5>", function()
-	vim.cmd("!cd " .. vim.fn.getcwd() .. "\\build && cmake --build . && main.exe")
-end)
+	if vim.bo.filetype == "java" then
+		local home = vim.fn.expand("~")
+		local cmd = string.format(
+			[[pwsh -NoProfile -Command "mvn clean package -DskipTestscd; if (Test-Path '%s\\Tomcat\\webapps\\api.war') { Remove-Item -Force '%s\\Tomcat\\webapps\\api.war' } Copy-Item 'SignoSoftServer\target\SignoSoftServer.war' '%s\\Tomcat\\webapps\\api.war'"]],
+			home, home, home
+		)
+		vim.cmd("!" .. cmd)
+		return
+	end
+	if vim.bo.filetype == "cpp" then
+		vim.cmd("!cd " .. vim.fn.getcwd() .. "\\build && cmake --build . && main.exe")
+	end
+end, { noremap = true, silent = true })
+
+-- set("n", "<F5>", function()
+-- 	if vim.bo.filetype == "cpp" then
+-- 		vim.cmd("!cd " .. vim.fn.getcwd() .. "\\build && cmake --build . && main.exe")
+-- 	end
+-- end, { noremap = true, silent = true })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "sql", "mysql", "pgsql", "plsql" },

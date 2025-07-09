@@ -33,8 +33,10 @@ if (Test-Path($ChocolateyProfile)) {
 
 Set-Location C:/Filip/
 
+Set-Alias dc 'docker-compose'
 Set-Alias godot4 "C:\Filip\Game_Projects\Godot_v4.3-stable_win64.exe\Godot_v4.3-stable_win64.exe"
 Set-Alias vi nvim
+Set-Alias vim nvim
 Set-Alias ls betterLS
 function betterLS{
 	eza -l

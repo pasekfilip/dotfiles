@@ -36,6 +36,7 @@ opt.background = "dark" -- colorschemes that can be light or dark will be made d
 opt.signcolumn = "yes"  -- show sign column so that text doesn't shif
 opt.updatetime = 100
 vim.o.lazyredraw = true
+opt.timeoutlen = 300
 -- backspace
 opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
 

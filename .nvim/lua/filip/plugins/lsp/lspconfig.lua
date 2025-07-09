@@ -180,7 +180,7 @@ return {
 		})
 		vim.lsp.enable("jdtls")
 
-		local node_modules_path = "C:\\Users\\filip\\AppData\\Local\\nvm\\v20.11.1\\node_modules"
+		local node_modules_path = "C:\\Users\\filip\\AppData\\Local\\nvm\\v24.3.0\\node_modules"
 		vim.lsp.config('angularls', {
 			cmd = {
 				'ngserver',
@@ -188,7 +188,7 @@ return {
 				'--tsProbeLocations', node_modules_path,
 				'--ngProbeLocations', node_modules_path
 			},
-			filetypes = { "ts", 'html' },
+			filetypes = { "typescript", 'htmlangular' },
 			root_markers = { 'angular.json', 'project.json', 'package.json', '.git' },
 		})
 		vim.lsp.enable("angularls")
