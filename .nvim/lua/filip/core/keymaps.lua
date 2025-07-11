@@ -45,7 +45,6 @@ set("n", "<F5>", function()
 			home, home, home
 		)
 		vim.cmd("!" .. cmd)
-		return
 	end
 	if vim.bo.filetype == "cpp" then
 		vim.cmd("!cd " .. vim.fn.getcwd() .. "\\build && cmake --build . && main.exe")
