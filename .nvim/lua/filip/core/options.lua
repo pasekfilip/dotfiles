@@ -34,7 +34,7 @@ opt.cursorline = true -- highlight the current cursor line
 opt.termguicolors = true
 opt.background = "dark" -- colorschemes that can be light or dark will be made dark
 opt.signcolumn = "yes"  -- show sign column so that text doesn't shif
-opt.updatetime = 100
+opt.updatetime = 300
 vim.o.lazyredraw = true
 opt.timeoutlen = 300
 -- backspace
