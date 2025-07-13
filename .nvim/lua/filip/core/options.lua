@@ -1,65 +1,92 @@
-vim.cmd("let g:netrw_liststyle = 3")
-
 local opt = vim.opt
 
-opt.relativenumber = true
-opt.number = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.undotree_DiffCommand = "FC"
 
--- tabs & indentation
-opt.tabstop = 4       -- 4 spaces for tabs (prettier default)
-opt.shiftwidth = 4    -- 2 spaces for indent width
-opt.expandtab = false -- expand tab to spaces
-opt.softtabstop = 4
-opt.autoindent = true -- copy indent from current line when starting new one
-opt.breakindent = true
+-- Basic settings
+opt.number = true                             -- Line numbers
+opt.relativenumber = true                     -- Relative line numbers
+opt.cursorline = true                         -- Highlight current line
+opt.wrap = false                              -- Don't wrap lines
+opt.scrolloff = 10                            -- Keep 10 lines above/below cursor
+opt.sidescrolloff = 8                         -- Keep 8 columns left/right of cursor
 
--- line wrapping
-opt.wrap = true
-opt.linebreak = true
+-- Indentation
+opt.tabstop = 4                               -- Tab width
+opt.shiftwidth = 4                            -- Indent width
+opt.softtabstop = 4                           -- Soft tab stop
+opt.expandtab = true                          -- Use spaces instead of tabs
+opt.smartindent = true                        -- Smart auto-indenting
+opt.autoindent = true                         -- Copy indent from current line
 
--- search settings
-opt.ignorecase = true -- ignore case when searching
-opt.smartcase = true  -- if you include mixed case in your search, assumes you want case-sensitive
-opt.scrolloff = 8
--- cursor line
-opt.cursorline = true -- highlight the current cursor line
+-- Search settings
+opt.ignorecase = true                         -- Case insensitive search
+opt.smartcase = true                          -- Case sensitive if uppercase in search
+opt.hlsearch = true                           -- Don't highlight search results
+opt.incsearch = true                          -- Show matches as you type
+opt.inccommand = 'split'					  -- When doing /%s it opens split for preview
 
--- appearance
+-- Visual settings
+opt.termguicolors = true                      -- Enable 24-bit colors
+opt.signcolumn = "yes"                        -- Always show sign column
+-- opt.colorcolumn = "150"                    -- Show column at 100 characters
+opt.showmatch = true                          -- Highlight matching brackets
+opt.matchtime = 2                             -- How long to show matching bracket
+opt.cmdheight = 1                             -- Command line height
+opt.completeopt = "menuone,noinsert,noselect" -- Completion options
+opt.showmode = false                          -- Don't show mode in command line
+opt.pumheight = 10                            -- Popup menu height
+opt.pumblend = 10                             -- Popup menu transparency
+opt.winblend = 0                              -- Floating window transparency
+opt.conceallevel = 0                          -- Don't hide markup
+opt.concealcursor = ""                        -- Don't hide cursor line markup
+opt.lazyredraw = true                         -- Don't redraw during macros
+opt.synmaxcol = 300                           -- Syntax highlighting limit
+opt.more = true								  -- When message dosent fit on the screen it shows -- more --
 
--- turn on termguicolors for nightfly colorscheme to work
--- (have to use iterm2 or any other true color terminal)
-opt.termguicolors = true
-opt.background = "dark" -- colorschemes that can be light or dark will be made dark
-opt.signcolumn = "yes"  -- show sign column so that text doesn't shif
-opt.updatetime = 300
-vim.o.lazyredraw = true
-opt.timeoutlen = 300
--- backspace
-opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
-
--- clipboard
-opt.clipboard:append("unnamedplus") -- use system clipboard as default register
-
--- split windows
-opt.splitright = true -- split vertical window to the right
-opt.splitbelow = true -- split horizontal window to the bottom
-
-opt.inccommand = 'split'
-opt.wildmode = "longest:full,full" -- Command-line completion mode
-opt.more = true
-opt.swapfile = false
-opt.undofile = true
+-- File handling
+opt.backup = false                             -- Don't create backup files
+opt.writebackup = false                        -- Don't create backup before writing
+opt.swapfile = false                           -- Don't create swap files
+opt.undofile = true                            -- Persistent undo
+opt.undodir = vim.fn.expand("~/.vim/undodir")  -- Undo directory
+opt.updatetime = 300                           -- Faster completion
+opt.timeoutlen = 500                           -- Key timeout duration
+opt.ttimeoutlen = 0                            -- Key code timeout
+opt.autoread = true                            -- Auto reload files changed outside vim
+opt.autowrite = false                          -- Don't auto save
 opt.shada = { "'10", "<0", "s10", "h" }
 
+-- Behavior settings
+opt.hidden = true                              -- Allow hidden buffers
+opt.errorbells = false                         -- No error bells
+opt.backspace = "indent,eol,start"             -- Better backspace behavior
+opt.autochdir = false                          -- Don't auto change directory
+opt.iskeyword:append("-")                      -- Treat dash as part of word
+opt.path:append("**")                          -- include subdirectories in search
+opt.selection = "exclusive"                    -- Selection behavior
+opt.mouse = "a"                                -- Enable mouse support
+opt.clipboard:append("unnamedplus")            -- Use system clipboard
+opt.modifiable = true                          -- Allow buffer modifications
+opt.encoding = "UTF-8"                         -- Set encoding
+opt.wildmode = "longest:full,full"             -- Command-line completion mode
+
+-- Split behavior
+opt.splitbelow = true                          -- Horizontal splits go below
+opt.splitright = true                          -- Vertical splits go right
+
+-- Folding settings
+opt.foldmethod = "expr"                          -- Use expression for folding
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Use treesitter for folding
+opt.foldlevel = 99                               -- Start with all folds open
+
 vim.api.nvim_create_autocmd('TextYankPost', {
-	desc = 'Highlight when yanking (copying) text',
-	group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
 })
 
 -- vim.api.nvim_create_autocmd("FileType", {
@@ -72,10 +99,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- })
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "*",
-	callback = function()
-		vim.opt.formatoptions = "jql"
-	end,
+  pattern = "*",
+  callback = function()
+    vim.opt.formatoptions = "jql"
+  end,
 })
 --
 -- local projectFile = vim.fn.filereadable(vim.fn.getcwd() .. '/project.godot')
