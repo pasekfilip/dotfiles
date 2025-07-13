@@ -56,9 +56,9 @@ end)
 
 config.keys = {
 	{
-		mods = 'CTRL',
-		key = 'v',
-		action = wezterm.action.PasteFrom 'Clipboard'
+		mods = 'CTRL | SHIFT',
+		key = 'd',
+		action = wezterm.action.ShowDebugOverlay
 	},
 	{
 		mods = 'CTRL | SHIFT',
