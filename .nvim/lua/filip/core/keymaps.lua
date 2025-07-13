@@ -35,6 +35,9 @@ set("n", "<C-u>", "<C-u>zz")
 set("n", "n", "nzzzv")
 set("n", "N", "Nzzzv")
 
+set("x", ">", ">gv")
+set("x", "<", "<gv")
+
 set("x", "<leader>p", "\"_dP", { desc = "When pasting over selected it sends it to the void register" }) -- very cool remap
 
 set("n", "<F5>", function()
