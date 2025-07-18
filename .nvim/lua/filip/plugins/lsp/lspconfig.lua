@@ -147,7 +147,9 @@ return {
                 "-Declipse.product=org.eclipse.jdt.ls.core.product",
                 "-Dlog.protocol=true",
                 "-Dlog.level=ALL",
-                "-Xmx1g",
+                "-Xmx4g",
+                "-XX:+UseG1GC",
+                "-XX:+UseStringDeduplication",
                 "--add-modules=ALL-SYSTEM",
                 "--add-opens", "java.base/java.util=ALL-UNNAMED",
                 "--add-opens", "java.base/java.lang=ALL-UNNAMED",
@@ -161,18 +163,22 @@ return {
             -- root_markers = { ".git", "pom.xml", "build.gradle" },
             settings = {
                 java = {
+                    autobuild = {
+                        enabled = false, -- Avoid constant rebuilds
+                    },
                     -- contentProvider = { preferred = 'javap' },
                     configuration = {
                         runtimes = {
+                            -- {
+                            --     name = "JavaSE-11",
+                            --     path = "C:/Program Files/Amazon Corretto/jdk11.0.27_6/",
+                            --     default = true,
+                            -- },
                             {
-                                name = "JavaSE-11",
-                                path = "C:/Program Files/Amazon Corretto/jdk11.0.27_6/",
+                                name = "JavaSE-21",
+                                path = "C:/Program Files/Amazon Corretto/jdk21.0.7_6/",
                                 default = true,
                             },
-                            -- {
-                            -- 	name = "JavaSE-21",
-                            -- 	path = "C:/Program Files/Amazon Corretto/jdk21.0.7_6/"
-                            -- },
                         },
                         updateBuildConfiguration = "interactive",
                     },
