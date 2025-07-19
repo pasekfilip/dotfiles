@@ -138,10 +138,11 @@ return {
         local workspace_dir = vim.fn.stdpath("data") ..
             "/jdtls-workspace/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
 
+
         vim.lsp.config("jdtls", {
             cmd = {
                 java_exec,
-                "-javaagent:C:/Filip/Repo/lombok.jar",
+                "-javaagent:" .. jdtls_path .. "/lombok.jar",
                 "-Declipse.application=org.eclipse.jdt.ls.core.id1",
                 "-Dosgi.bundles.defaultStartLevel=4",
                 "-Declipse.product=org.eclipse.jdt.ls.core.product",
