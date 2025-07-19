@@ -30,7 +30,8 @@ return {
                 keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
 
                 opts.desc = "Show LSP definitions"
-                keymap.set("n", "gd", vim.lsp.buf.definition, opts)     -- show lsp definitions
+                keymap.set("n", "gd", vim.lsp.buf.definition, opts) -- show lsp definitions
+
                 opts.desc = "Show LSP implementations"
                 keymap.set("n", "gi", vim.lsp.buf.implementation, opts) -- show lsp implementations
 
@@ -65,7 +66,7 @@ return {
                 keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
                 opts.desc = "Show signature help"
-                keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+                keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts) -- show documentation for what is under cursor
 
                 -- opts.desc = "Restart LSP"
                 -- keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
@@ -140,12 +141,15 @@ return {
         vim.lsp.config("jdtls", {
             cmd = {
                 java_exec,
+                "-javaagent:C:/Filip/Repo/lombok.jar",
                 "-Declipse.application=org.eclipse.jdt.ls.core.id1",
                 "-Dosgi.bundles.defaultStartLevel=4",
                 "-Declipse.product=org.eclipse.jdt.ls.core.product",
                 "-Dlog.protocol=true",
                 "-Dlog.level=ALL",
-                "-Xmx1g",
+                "-Xmx4g",
+                "-XX:+UseG1GC",
+                "-XX:+UseStringDeduplication",
                 "--add-modules=ALL-SYSTEM",
                 "--add-opens", "java.base/java.util=ALL-UNNAMED",
                 "--add-opens", "java.base/java.lang=ALL-UNNAMED",
@@ -159,18 +163,22 @@ return {
             -- root_markers = { ".git", "pom.xml", "build.gradle" },
             settings = {
                 java = {
+                    autobuild = {
+                        enabled = false, -- Avoid constant rebuilds
+                    },
                     -- contentProvider = { preferred = 'javap' },
                     configuration = {
                         runtimes = {
+                            -- {
+                            --     name = "JavaSE-11",
+                            --     path = "C:/Program Files/Amazon Corretto/jdk11.0.27_6/",
+                            --     default = true,
+                            -- },
                             {
-                                name = "JavaSE-11",
-                                path = "C:/Program Files/Amazon Corretto/jdk11.0.27_6/",
+                                name = "JavaSE-21",
+                                path = "C:/Program Files/Amazon Corretto/jdk21.0.7_6/",
                                 default = true,
                             },
-                            -- {
-                            -- 	name = "JavaSE-21",
-                            -- 	path = "C:/Program Files/Amazon Corretto/jdk21.0.7_6/"
-                            -- },
                         },
                         updateBuildConfiguration = "interactive",
                     },
