@@ -121,11 +121,11 @@ config.keys = {
         key = "c",
         action = wezterm.action.CopyTo("ClipboardAndPrimarySelection"),
     },
-    -- {
-    --     mods = "CTRL | SHIFT",
-    --     key = "v",
-    --     action = wezterm.action.SplitHorizontal { domain = "CurrentPaneDomain" }
-    -- },
+    {
+        mods = "CTRL | SHIFT",
+        key = "s",
+        action = wezterm.action.SplitHorizontal { domain = "CurrentPaneDomain" }
+    },
     {
         mods = "CTRL | SHIFT",
         key = "-",
