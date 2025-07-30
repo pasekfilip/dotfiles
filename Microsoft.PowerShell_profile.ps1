@@ -1,17 +1,15 @@
+Set-Location C:/Filip/
+
 oh-my-posh init pwsh --config 'C:\Users\Filip\AppData\Local\Programs\oh-my-posh\themes\probua.minimal.omp.json' | Invoke-Expression
 Invoke-Expression (zoxide init powershell --cmd cd --hook pwd | Out-String)
 
-if (!(Get-Module PSReadLine))
-{
-	Import-Module PSReadLine
-}
 # Shows navigable menu of all options when hitting Tab
-Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
-# Autocompleteion for Arrow keys
+# Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+# Set-PSReadLineOption -Show
 Set-PSReadLineOption -HistorySearchCursorMovesToEnd
-Set-PSReadLineOption -EditMode Vi
 Set-PSReadLineOption -ShowToolTips
 Set-PSReadLineOption -PredictionSource History
+Set-PSReadLineOption -HistoryNoDuplicates:$true
 Set-PSReadLineOption -Colors @{
     "Command" = "Cyan";
     "Parameter" = "Yellow";
@@ -31,7 +29,6 @@ if (Test-Path($ChocolateyProfile)) {
   Import-Module "$ChocolateyProfile"
 }
 
-Set-Location C:/Filip/
 
 Set-Alias dc 'docker-compose'
 Set-Alias godot4 "C:\Filip\Game_Projects\Godot_v4.3-stable_win64.exe\Godot_v4.3-stable_win64.exe"
